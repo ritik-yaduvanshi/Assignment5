@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .head1 {
+            background : #1abc9c;
+            text-align : center;
+            overflow:hidden;
+            margin-bottom:50px;
+            padding: 40px;
+        }
+        table{
+            background:#1abc9c;
+            border: 1px solid black;
+            margin:auto;
+            margin-top:20px;
+        }
+        .button{
+            float:left;
+        }
+        .button2{
+            float:right;
+        }
+        tr{
+            text-align:center;
+        }
+        hr{
+            width:50%;
+        }
+        .l {
+            float:left;
+        }
+        .r{
+            float:right;
+        }
+        .foot{
+            background : #1abc9c;
+            text-align : center;
+            overflow:hidden;
+            margin-top:50px;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="head1">
+        <h1>Assignment - 5</h1>
+        <hr>
+        <div class="l">
+            <table>
+                <tr>
+                    <td>Submitted By : Ritik Bhushan Yadav</td>
+                </tr>
+                <tr>
+                    <td>
+                        Section : 3F
+                    </td>
+                </tr>
+                <tr>
+                    <td>Class Roll No : 33</td>
+                </tr>
+                <tr>
+                    <td>
+                        Univ Roll No : 191500658
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="r">
+            <table>
+                <tr>
+                    <td>
+                        Submitted To : Mr. Akash Kumar Chaudhary
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <center><h3><bold>1.Number Game</bold></h3></center>
+    <p>
+        <strong>Description :</strong>This is a Number Guess Game!<br>
+        <strong>How To Play :</strong>You Have To Enter any number between in range of 1 to 100.if your entered number match with the auto generated number match will over!
+    </p>
+    <div class="mid">
+        <table cellspacing = "5"cellpadding ="10">
+            <form action="" method="POST">
+                <tr>
+                    <td>
+                        <label for="inputNum">Input The Number In Range(1-100):</label>
+                        <input type="number" id="inputNum" name="inputNum">
+                    </td>
+                </tr>
+                <tr class="button">
+                    <td>
+                        <input type="submit" id="submit" name="submit" value="Start">
+                    </td>
+                </tr>
+                <tr class="button2">
+                    <td>
+                        <input type="submit" id="reset" name="reset" value="Reset">
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
+    <div class="end">
+        <table cellspacing = "5"cellpadding ="10">
+            <?php
+                if(isset($_POST['submit']))
+                {
+                    $user_input = $_POST['inputNum'];
+                    if($user_input <=0){
+                        echo "<tr><td>Please Enter The Number!</td></tr>";
+                        return;
+                    }
+                    echo "<tr><td>Result</td></tr>";
+                    echo"<tr><td><hr></td></tr>";
+                    while(true)
+                    {
+                        $gen_Number = rand(1,100);
+                        if($gen_Number < $user_input)
+                        {
+                        echo "<tr><td>Your Guessed Number Is Higher Then Genrated Number!</td></tr>";
+                        }else if($gen_Number > $user_input)
+                        {
+                        echo "<tr><td>Your Guessed Number Is Lower Then Genrated Number!</td></tr>";
+                        }else{
+                        echo"<tr><td>Congratulations ! Number Matched!</td></tr>";
+                        echo"<tr><td>Game Stopped!</td></tr>";
+                        break;
+                        }   
+                    }  
+                }
+                else if(isset($_POST['reset']))
+                {
+                    header("refresh:0; url=Assignment.php");
+                }
+                
+            ?>
+        </table>
+    </div>
+    <center><h3>2.Check Entered Number is Adam or Not?</h3></center>
+    <p><strong>Hint :</strong> You Have to Enter Any Number and it will check Entered Number is ADAM or Not?</p>
+    <div class="adam">
+        <table cellspacing = "5"cellpadding ="10">
+            <form action="" method="POST">
+                <tr>
+                    <td>
+                        <label for="inputNum1">Input The Number :</label>
+                        <input type="number" id="inputNum1" name="inputNum1">
+                    </td>
+                </tr>
+                <tr class="button">
+                    <td>
+                        <input type="submit" id="submit" name="ans" value="Check">
+                    </td>
+                </tr>
+                <tr class="button2">
+                    <td>
+                        <input type="submit" id="reset" name="Reset" value="Reset">
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
+    <div class="final">
+        <table margin-top="20px" cellspacing = "5"cellpadding ="10">
+            <?php
+                function rev($nu)
+                {
+                    $a = 0;
+                    while($nu>1)
+                    {
+                        $a = $a*10 +($nu%10);
+                        $nu = $nu/10;
+                    }
+                    return $a;
+                }
+                if(isset($_POST['ans']))
+                {
+                    $n = $_POST['inputNum1'];
+                    if($n < 0)
+                    {
+                        echo "<tr><td>Please Enter The Number!</td></tr>";
+                        return;
+                    }
+                    $s = $n**2;
+                    $rev_num = rev($n);
+                    $se = $rev_num**2;
+                    $ans_rev = rev($se);
+                    if($ans_rev==$s)
+                    {
+                        echo"<tr><td>Input Number Is Adam!</td></tr>";
+                    }else{
+                        echo"<tr><td>Input Number Is Not Adam!</td></tr>";
+                    }
+                }else if(isset($_POST['Reset']))
+                {
+                    header("refresh:0; url=Assignment.php");
+                }
+            ?>
+        </table>
+    </div>
+    <div class="foot">
+        <h2>"Created By CodexRitik"</h2>
+    </div>
+</body>
+</html>
